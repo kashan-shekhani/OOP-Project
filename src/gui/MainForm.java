@@ -1,6 +1,6 @@
 package gui;
 
-import database.DatabaseInitializer;
+import database.DatabaseConnection;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -100,9 +100,6 @@ public class MainForm extends JFrame {
     
     public static void main(String[] args) {
         try {
-            // Initialize database
-            DatabaseInitializer.initializeDatabase();
-            
             // Set look and feel
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             
