@@ -100,7 +100,7 @@ public class InventoryPanel extends JPanel {
         panel.setBorder(BorderFactory.createTitledBorder("Inventory List"));
         
         // Create table model
-        String[] columns = {"ID", "Name", "Quantity", "Price", "Supplier"};
+        String[] columns = {"ID", "Name", "Quantity", "Status", "Supplier"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -153,7 +153,7 @@ public class InventoryPanel extends JPanel {
                     rs.getInt("ItemID"),
                     rs.getString("ItemName"),
                     rs.getDouble("Quantity"),
-                    rs.getDouble("Price"),
+                    rs.getString("Status"),
                     rs.getInt("SupplierID")
                 );
                 inventoryItems.add(item);
@@ -170,7 +170,7 @@ public class InventoryPanel extends JPanel {
             item.getId(),
             item.getName(),
             item.getQuantity(),
-            item.getPrice(),
+            item.getStatus(),
             supplierName
         });
     }
@@ -189,13 +189,13 @@ public class InventoryPanel extends JPanel {
             
             try (Connection conn = DatabaseConnection.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(
-                     "INSERT INTO Inventory (ItemName, Quantity, Price, SupplierID) " +
+                     "INSERT INTO Inventory (ItemName, Quantity, Status, SupplierID) " +
                      "VALUES (?, ?, ?, ?)",
                      Statement.RETURN_GENERATED_KEYS)) {
                 
                 pstmt.setString(1, quality);
                 pstmt.setDouble(2, quantity);
-                pstmt.setDouble(3, 0.0);
+                pstmt.setString(3, status);
                 pstmt.setInt(4, supplier.getId());
                 
                 pstmt.executeUpdate();
@@ -206,7 +206,7 @@ public class InventoryPanel extends JPanel {
                             rs.getInt(1),
                             quality,
                             quantity,
-                            0.0,
+                            status,
                             supplier.getId()
                         );
                         inventoryItems.add(item);

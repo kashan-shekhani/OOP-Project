@@ -4,14 +4,14 @@ public class Inventory {
     private int id;
     private String name;
     private double quantity;
-    private double price;
+    private String status;
     private int supplierId;
     
-    public Inventory(int id, String name, double quantity, double price, int supplierId) {
+    public Inventory(int id, String name, double quantity, String status, int supplierId) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
-        this.price = price;
+        this.status = status;
         this.supplierId = supplierId;
     }
     
@@ -25,8 +25,8 @@ public class Inventory {
     public double getQuantity() { return quantity; }
     public void setQuantity(double quantity) { this.quantity = quantity; }
     
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
     
     public int getSupplierId() { return supplierId; }
     public void setSupplierId(int supplierId) { this.supplierId = supplierId; }
